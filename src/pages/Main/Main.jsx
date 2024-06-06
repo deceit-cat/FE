@@ -139,7 +139,7 @@ export const Main = () => {
         };
 
         handleGetRoomInfo();
-    }, [roomsState]);
+    }, []);
 
     return (    
         <>

@@ -17,14 +17,15 @@ import { getDutyState } from '../../function/setprofile.js';
 import { checkChatable } from "../../function/time.js";
 
 export const Header = () => {
+    const [isHovered, setIsHovered] = useState(false);
+    const [isUpdatingNow, setIsUpdatingNow] = useState(false);
     const [iconsState, setIconsState] = useRecoilState(IconsState);
     const setIsChatActive = useSetRecoilState(ChatActiveState);
-    const [isHovered, setIsHovered] = useState(false);
     const setRoomsState = useSetRecoilState(RoomsState);
-    const [isUpdatingNow, setIsUpdatingNow] = useState(false);
     const role = getRole() === "TEACHER" ? "선생님" : "학부모";
 
     const handleGetRoomInfo = async () => {
+        setIsChatActive(false);
         try {
             setIsUpdatingNow(!isUpdatingNow);
             const roomInfos = await getRoomInfo();
@@ -108,7 +109,6 @@ export const Header = () => {
             >
                 <Role />
                 <StyledIcon className="fas fa-user" size='30px' onClick={()=> {
-
                     setIsChatActive(false);
                     setIconsState(()=> ({
                         chatList: false,
